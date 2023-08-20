@@ -1,3 +1,6 @@
 .header {
-
+  width: 68.75%;
+  padding-top: 45px;
+  padding-bottom: 41px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }

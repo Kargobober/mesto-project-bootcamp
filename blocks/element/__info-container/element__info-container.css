@@ -1,3 +1,8 @@
-.element-info-container {
-
+.element__info-container {
+  padding: 25px 15px 31px 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  max-width: 100%;
+  box-sizing: border-box;
 }

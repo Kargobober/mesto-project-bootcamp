@@ -1,3 +1,26 @@
 .element__like-button {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/button-like.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  flex-shrink: 0;
+  transition: background-image .4s ease-in;
+  transition: opacity .2s ease-in;
+  /* Повысим уровень z, иначе сердчеко не реагирует на мышь */
+  z-index: 1;
+}
 
+.element__like-button:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.element__like-button:active {
+  background-image: url(../../../images/button-like-active.svg);
+  opacity: 1;
 }

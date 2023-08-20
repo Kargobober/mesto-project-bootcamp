@@ -1,3 +1,12 @@
 .element {
+  border-radius: 10px;
+  background-color: #fff;
+  overflow: hidden;
+  width: 282px;
+  display: flex;
+  flex-direction: column;
+}
 
+.element:hover {
+  cursor: pointer;
 }

@@ -9,84 +9,96 @@
 </head>
 <body class="page">
 
-  <header class="header">
-    <img src="./images/logo-mesto-russia.svg" alt="Логотип сайта в виде надписи &quot;Mesto Russia&quot;" class="logo header__logo">
+  <header class="header page__header">
+    <img class="header__logo" src="./images/logo-mesto-russia.svg" alt="Логотип сайта в виде надписи &quot;Mesto Russia&quot;">
   </header>
 
-  <main class="content">
+  <div class="pop-up pop-up_opened">
+    <form class="form form_type_profile">
+      <label class="accessibility" for="close-profile">Закрыть редактор профиля</label>
+      <button class="form__close-button" id="close-profile"></button>
+      <h2 class="form__heading">Редактировать профиль</h2>
+      <label class="accessibility" for="username">Ваше имя</label>
+      <input class="form__item form__item_el_username" type="text" id="username" name="username" placeholder="Ваше имя" required>
+      <label class="accessibility" for="user-about">О себе</label>
+      <input class="form__item form__item_el_user-about" type="text" id="user-about" name="user-about" placeholder="О себе">
+      <button class="form__submit-button">Сохранить</button>
+    </form>
+  </div>
 
-    <section class="profile">
+  <main class="content">
+    <section class="profile content__profile">
       <img class="profile__avatar" src="./images/user-photo-kusto.jpg" alt="Аватарка пользователя" >
       <div class="profile__info">
         <h1 class="profile__username">Жак-Ив Кусто</h1>
         <label class="accessibility" for="edit-profile">Редактировать профиль</label>
-        <button class="profile__edit-button" name="edit-profile" type="button"></button>
+        <button class="profile__edit-button" id="edit-profile" type="button"></button>
         <p class="profile__user-about">Исследователь океана и Ленобласти</p>
       </div>
-      <label class="accessibility" for="add-card">Добавить карточку</label>
-      <button class="profile__add-button" name="add-card" type="button"></button>
+      <label class="accessibility" for="add-elemnt">Добавить карточку</label>
+      <button class="profile__add-button" id="add-element" type="button"></button>
     </section>
 
-    <section class="elements">
+    <section class="elements content__elements">
       <ul class="elements__list">
         <li class="element">
           <img class="element__image" src="./images/place-karachaevsk.jpg" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Карачаевск</h2>
+            <label class="accessibility" for="like-place-karachaevsk">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-karachaevsk" name="like-place-karachaevsk" type="submit"></button>
           </div>
         </li>
 
         <li class="element">
           <img class="element__image" src="./images/place-ruskeala.jpg" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Рускеала</h2>
+            <label class="accessibility" for="like-place-ruskeala">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-ruskeala" name="like-place-ruskeala" type="submit"></button>
           </div>
         </li>
 
         <li class="element">
           <img class="element__image" src="./images/place-elbrus.png" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Гора Эльбрус</h2>
+            <label class="accessibility" for="like-place-elbrus">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-elbrus" name="like-place-elbrus" type="submit"></button>
           </div>
         </li>
 
         <li class="element">
           <img class="element__image" src="./images/place-dombay.png" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Домбай</h2>
+            <label class="accessibility" for="like-place-dombay">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-dombay" name="like-place-dombay" type="submit"></button>
           </div>
         </li>
 
         <li class="element">
           <img class="element__image" src="./images/place-vyborg.jpg" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Выборг</h2>
+            <label class="accessibility" for="like-place-vyborg">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-vyborg" name="like-place-vyborg" type="submit"></button>
           </div>
         </li>
 
         <li class="element">
           <img class="element__image" src="./images/place-yastrebinoye.jpg" alt="">
           <div class="element__info-container">
-            <h2 class="element__heading"></h2>
-            <label class="accessibility" for="like">Поставить любовь</label>
-            <button class="element__like-button" name="like" type="button"></button>
+            <h2 class="element__heading">Ястребиное озеро</h2>
+            <label class="accessibility" for="like-place-yastrebinoye">Поставить любовь</label>
+            <button class="element__like-button" id="like-place-yastrebinoye" name="like-place-yastrebinoye" type="submit"></button>
           </div>
         </li>
       </ul>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer page__footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
 </body>

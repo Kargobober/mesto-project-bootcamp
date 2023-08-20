@@ -1,3 +1,12 @@
-.element-heading {
-
+.element__heading {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin: 0;
+  padding-right: 32px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
