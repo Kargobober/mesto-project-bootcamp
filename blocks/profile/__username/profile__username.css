@@ -4,8 +4,29 @@
   font-style: normal;
   font-weight: 500;
   line-height: 1.14286;
-  max-width: 90.5%;
+  max-width: 85%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex-shrink: 0;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile__username {
+    font-size: 35px;
+    line-height: normal;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .profile__username {
+    margin-bottom: 14px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profile__username {
+    font-size: 27px;
+  }
 }

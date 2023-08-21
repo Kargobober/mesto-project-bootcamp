@@ -23,3 +23,9 @@
 .form__submit-button:active {
   opacity: 1;
 }
+
+@media screen and (max-width: 650px) {
+  .form__submit-button {
+    font-size: 14px;
+  }
+}

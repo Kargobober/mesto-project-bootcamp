@@ -7,3 +7,16 @@
 
   margin: 0 0 54px;
 }
+
+@media screen and (max-width: 650px) {
+  .form__heading {
+    margin-bottom: 75px;
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .form__heading {
+    font-size: 18px;
+  }
+}

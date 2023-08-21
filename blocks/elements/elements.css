@@ -1,3 +1,9 @@
 .elements {
  width: 68.75%;
 }
+
+@media screen and (max-width: 414px) {
+  .elements {
+    width: 88.125%;
+  }
+}

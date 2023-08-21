@@ -1,14 +1,15 @@
 .profile__add-button {
   background-color: transparent;
   padding: 0;
-  border: 0;
+  border: 2px solid #fff;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
-  background-image: url(../../../images/button-add.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
   flex-shrink: 0;
   transition: opacity .2s ease-in;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
 }
 
 .profile__add-button:hover {
@@ -18,4 +19,10 @@
 
 .profile__add-button:active {
   opacity: 1;
+}
+
+@media screen and (max-width: 970px) {
+  .profile__add-button {
+    width: 282px;
+  }
 }

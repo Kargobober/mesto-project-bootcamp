@@ -2,6 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  max-width: 62.5%;
+  /* Столько место по ширине остается, если учесть, что автарка 120px,
+  кнопка добавления 150px, а отступы ещё немного занимают*/
+  max-width: calc(100% - 120px - 30px * 2 - 150px);
   column-gap: 18px;
+}
+
+@media screen and (max-width: 970px) {
+  .profile__info {
+    justify-content: center;
+    text-align: center;
+    column-gap: 10px;
+    max-width: 100%;
+  }
 }

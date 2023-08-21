@@ -4,8 +4,23 @@
   font-weight: 400;
   line-height: normal;
   margin: 0;
+  /* Ставим ширину 100%, чтобы данный элемент был на новой строке флекса */
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 970px) {
+  .profile__user-about {
+    margin-bottom: 36px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profile__user-about {
+    font-size: 14px;
+  }
 }

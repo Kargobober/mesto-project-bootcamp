@@ -1,3 +1,9 @@
-.element-image {
+.element__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
 
+  color: #000;
+  text-align: center;
 }

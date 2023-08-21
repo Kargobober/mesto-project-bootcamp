@@ -3,6 +3,6 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  max-width: 100%;
   box-sizing: border-box;
+  max-width: 100%;
 }

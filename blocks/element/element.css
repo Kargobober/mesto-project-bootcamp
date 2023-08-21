@@ -2,11 +2,21 @@
   border-radius: 10px;
   background-color: #fff;
   overflow: hidden;
-  width: 282px;
+  min-width: 282px;
+  max-width: 340px;
+  flex-basis: 282px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
 .element:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 414px) {
+  .element {
+    max-width: 282px;
+  }
 }
