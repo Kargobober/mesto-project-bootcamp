@@ -1,9 +1,9 @@
 .form__item {
   border-radius: 0;
   border-top: none;
-  border-right:none;
+  border-right: none;
   border-left: none;
-  padding: 3px 3px 13px;
+  padding: 3px 3px 10px;
 
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 
@@ -15,4 +15,20 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  margin: 0 0 25px;
+}
+
+.form__item:nth-child(2) {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 650px) {
+  .form__item {
+    margin-bottom: 27px;
+  }
+
+  .form__item:nth-child(2) {
+    margin-bottom: 43px;
+  }
 }

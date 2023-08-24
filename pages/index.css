@@ -1,29 +1,15 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/inter.css);
+@import url(../blocks/variables/variables.css);
 
 @import url(../blocks/page/page.css);
-
-@import url(../blocks/accessibility/accessebility.css);
-
-@import url(../blocks/pop-up/pop-up.css);
-@import url(../blocks/pop-up/_opened/pop-up_opened.css);
 
 @import url(../blocks/page/__header/page__header.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
-@import url(../blocks/form/form.css);
-@import url(../blocks/form/_type/form_type_profile.css);
-@import url(../blocks/form/__close-button/form__close-button.css);
-@import url(../blocks/form/__submit-button/form__submit-button.css);
-@import url(../blocks/form/__item/form__item.css);
-@import url(../blocks/form/__item/_el/form__item_el_user-about.css);
-@import url(../blocks/form/__item/_el/form__item_el_username.css);
-@import url(../blocks/form/__heading/form__heading.css);
-
 @import url(../blocks/content/content.css);
 
-@import url(../blocks/content/__profile/content__profile.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
@@ -32,7 +18,6 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
-@import url(../blocks/content/__elements/content__elements.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
 @import url(../blocks/element/element.css);
@@ -44,3 +29,16 @@
 @import url(../blocks/page/__footer/page__footer.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../blocks/pop-up/pop-up.css);
+@import url(../blocks/pop-up/_opened/pop-up_opened.css);
+@import url(../blocks/pop-up/__container/pop-up__container.css);
+@import url(../blocks/pop-up/__container/_type/pop-up__container_type_profile.css);
+@import url(../blocks/pop-up/__close-button/pop-up__close-button.css);
+@import url(../blocks/pop-up/__heading/pop-up__heading.css);
+
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__submit-button/form__submit-button.css);
+@import url(../blocks/form/__item/form__item.css);
+
+@import url(../blocks/centered-element/centered-element.css);

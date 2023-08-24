@@ -10,6 +10,11 @@
   color: #fff;
   font-size: 28px;
   line-height: 1;
+  margin-top: calc(var(--profile-info-indent-top) + 13px);
+  background-image: url(../../../images/button-add.svg);
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .profile__add-button:hover {
@@ -24,5 +29,6 @@
 @media screen and (max-width: 970px) {
   .profile__add-button {
     width: 282px;
+    background-size: 17px 17px;
   }
 }

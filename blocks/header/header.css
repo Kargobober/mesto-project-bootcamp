@@ -1,7 +1,7 @@
 .header {
   width: 68.75%;
   padding-top: 45px;
-  padding-bottom: 41px;
+  padding-bottom: 37px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   box-sizing: border-box;
 }
@@ -17,7 +17,7 @@
   .header {
     width: 100%;
     padding-top: 28px;
-    padding-bottom: 32px;
+    padding-bottom: 26px;
     padding-left: 27px;
   }
 }

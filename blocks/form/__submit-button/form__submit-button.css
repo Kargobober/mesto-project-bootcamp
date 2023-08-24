@@ -5,7 +5,7 @@
   border: 0;
   color: #fff;
   width: 100%;
-  min-height: 50px;
+  min-height: 49px;
   border-radius: 2px;
   text-align: center;
   font-size: 18px;
@@ -27,5 +27,6 @@
 @media screen and (max-width: 650px) {
   .form__submit-button {
     font-size: 14px;
+    min-height: 46px;
   }
 }

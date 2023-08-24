@@ -1,22 +1,22 @@
-.form__heading {
+.pop-up__heading {
   color: #000;
   font-size: 24px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
 
-  margin: 0 0 54px;
+  margin: 0 0 45px;
 }
 
 @media screen and (max-width: 650px) {
-  .form__heading {
-    margin-bottom: 75px;
+  .pop-up__heading {
+    margin-bottom: 72px;
     font-size: 21px;
   }
 }
 
 @media screen and (max-width: 414px) {
-  .form__heading {
+  .pop-up__heading {
     font-size: 18px;
   }
 }

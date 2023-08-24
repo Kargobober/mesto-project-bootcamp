@@ -11,10 +11,6 @@
   flex-grow: 1;
 }
 
-.element:hover {
-  cursor: pointer;
-}
-
 @media screen and (max-width: 414px) {
   .element {
     max-width: 282px;

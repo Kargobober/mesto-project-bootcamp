@@ -6,6 +6,8 @@
   height: 24px;
   background-image: url(../../../images/button-edit.svg);
   background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   flex-shrink: 0;
   transition: opacity .2s ease-in;
 }

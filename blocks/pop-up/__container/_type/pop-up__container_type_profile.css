@@ -1,19 +1,17 @@
-.form_type_profile {
+.pop-up__container_type_profile {
   width: 430px;
-  min-height: 330px;
   padding: 34px 36px 37px;
 }
 
 @media screen and (max-width: 650px) {
-  .form_type_profile {
+  .pop-up__container_type_profile {
     width: 340px;
-    padding: 25px 22px;
+    padding: 26px 22px 25px;
   }
 }
 
 @media screen and (max-width: 414px) {
-  .form_type_profile {
+  .pop-up__container_type_profile {
     width: 282px;
-    min-height: 322px;
   }
 }

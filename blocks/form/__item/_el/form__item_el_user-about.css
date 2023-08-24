@@ -1,9 +1,0 @@
-.form__item_el_user-about {
-  margin: 0 0 48px;
-}
-
-@media screen and (max-width: 414px) {
-  .form__item_el_user-about {
-    margin-bottom: 45px;
-  }
-}

@@ -6,6 +6,7 @@
   кнопка добавления 150px, а отступы ещё немного занимают*/
   max-width: calc(100% - 120px - 30px * 2 - 150px);
   column-gap: 18px;
+  padding-top: var(--profile-info-indent-top);
 }
 
 @media screen and (max-width: 970px) {
@@ -14,5 +15,6 @@
     text-align: center;
     column-gap: 10px;
     max-width: 100%;
+    padding-top: 1px;
   }
 }

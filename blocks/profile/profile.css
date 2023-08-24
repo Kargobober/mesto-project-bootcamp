@@ -1,8 +1,8 @@
 .profile {
   max-width: 68.75%;
-  padding: 40px 0 51px;
+  padding: 40px 0 25px;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   column-gap: 30px;
 }
@@ -12,6 +12,7 @@
     max-width: 88.125%;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 42px 0 36px;
   }
 }

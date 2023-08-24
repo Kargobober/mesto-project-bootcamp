@@ -1,5 +1,5 @@
 .profile__username {
-  margin: 0 0 16px;
+  margin: 0 0 8px;
   font-size: 42px;
   font-style: normal;
   font-weight: 500;
@@ -9,7 +9,6 @@
   white-space: nowrap;
   overflow: hidden;
   flex-shrink: 0;
-  word-wrap: break-word;
 }
 
 @media screen and (max-width: 1024px) {
@@ -21,7 +20,8 @@
 
 @media screen and (max-width: 970px) {
   .profile__username {
-    margin-bottom: 14px;
+    padding-left: 27px;
+    margin-bottom: 6px;
   }
 }
 
