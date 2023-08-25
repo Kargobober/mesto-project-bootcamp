@@ -4,7 +4,7 @@
   align-items: baseline;
   /* Столько место по ширине остается, если учесть, что автарка 120px,
   кнопка добавления 150px, а отступы ещё немного занимают*/
-  max-width: calc(100% - 120px - 30px * 2 - 150px);
+  width: calc(100% - 120px - 30px * 2 - 150px);
   column-gap: 18px;
   padding-top: var(--profile-info-indent-top);
 }
@@ -14,7 +14,7 @@
     justify-content: center;
     text-align: center;
     column-gap: 10px;
-    max-width: 100%;
+    width: 100%;
     padding-top: 1px;
   }
 }

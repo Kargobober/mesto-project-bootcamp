@@ -3,7 +3,7 @@
   padding: 40px 0 25px;
   display: flex;
   align-items: start;
-  justify-content: space-between;
+  justify-content: flex-start;
   column-gap: 30px;
 }
 
