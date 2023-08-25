@@ -16,6 +16,6 @@
   text-rendering: optimizeLegibility;
 
   /* Отладочные свойства */
-  /* border: 1px red dashed; */
+  border: 1px red dashed;
   /* background-color: #d89292; */
 }
