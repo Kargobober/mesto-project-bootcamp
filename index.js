@@ -91,7 +91,7 @@ function createCard(name, imgLink) {
 }
 
 function insertCard(item) {
-  cards.append(item);
+  cards.prepend(item);
 }
 
 
@@ -125,3 +125,14 @@ profileForm.addEventListener('submit', saveProfile);
 cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
 // Нажатие на крестик в попапе карточки
 cardsButtonClose.addEventListener('click', evt => closePopup(cardsPopup));
+// Сохранение в редакторе карточки
+cardsForm.addEventListener('submit', function(evt) {
+  evt.preventDefault();
+  const cardName = cardsForm.querySelector('input[name="name"]');
+  const cardLink = cardsForm.querySelector('input[name="link"]');
+  const newCard = createCard(cardName.value, cardLink.value);
+  insertCard(newCard);
+  closePopup(cardsPopup);
+  cardName.value = '';
+  cardLink.value = '';
+})
