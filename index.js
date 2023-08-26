@@ -48,7 +48,7 @@ const profilePopup = document.getElementById('pop-up_profile');
 const profileButtonEdit = document.querySelector('.profile__edit-button');
 const profileButtonClose = profilePopup.querySelector('.pop-up__close-button');
 // Поиск формы внутри коллекции форм документа
-const profileForm = document.forms["form-profile"];
+const profileForm = document.forms['form-profile'];
 // Данные о пользователе со страницы (не из формы внутри модального окна)
 const profileUsername = document.querySelector('.profile__username');
 const profileAbout = document.querySelector('.profile__user-about');
@@ -56,6 +56,10 @@ const profileButtonSave = profileForm.querySelector('.form__submit-button');
 // У объекта template в его свойстве content сразу находим элемент списка (элемент вёрстки)
 const templateCard = document.getElementById('template-element').content.querySelector('.element');
 const cards = document.querySelector('.elements__list');
+const cardsButtonAdd = document.querySelector('.profile__add-button');
+const cardsPopup = document.getElementById('pop-up_element');
+const cardsForm = document.forms['form-element'];
+const cardsButtonClose = cardsPopup.querySelector('.pop-up__close-button');
 
 
 /* -----Функции----- */
@@ -92,6 +96,7 @@ function insertCard(item) {
 
 
 /* -----Логика----- */
+// Динамическое создание карточек из массива
 initialCards.forEach(item => {
   const newCard = createCard(item.name, item.link);
   insertCard(newCard);
@@ -115,3 +120,8 @@ profileButtonClose.addEventListener('click', function(evt) {
 // Сохранение в редакторе профиля
 // Вешаем слушателя не на кнопку, а на форму целиком!
 profileForm.addEventListener('submit', saveProfile);
+
+// Нажатие на плюсик - создать карточку
+cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
+// Нажатие на крестик в попапе карточки
+cardsButtonClose.addEventListener('click', evt => closePopup(cardsPopup));

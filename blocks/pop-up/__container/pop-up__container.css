@@ -4,4 +4,20 @@
   border-radius: 10px;
   position: relative;
   box-sizing: border-box;
+
+  width: 430px;
+  padding: 34px 36px 37px;
+}
+
+@media screen and (max-width: 650px) {
+  .pop-up__container {
+    width: 340px;
+    padding: 26px 22px 25px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .pop-up__container {
+    width: 282px;
+  }
 }

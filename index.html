@@ -94,13 +94,25 @@
   </footer>
 
   <div class="pop-up" id="pop-up_profile">
-    <div class="pop-up__container pop-up__container_type_profile">
-      <button class="pop-up__close-button" type="button" id="close-pop-up"></button>
+    <div class="pop-up__container">
+      <button class="pop-up__close-button" type="button" id="close-pop-up-profile"></button>
       <h2 class="pop-up__heading">Редактировать профиль</h2>
-      <form class="form form_type_profile" name="form-profile">
+      <form class="form" name="form-profile">
         <input class="form__item" type="text" id="username" name="name" placeholder="Ваше имя" required>
         <input class="form__item" type="text" id="user-about" name="about" placeholder="О себе">
         <button class="form__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="pop-up" id="pop-up_element">
+    <div class="pop-up__container">
+      <button class="pop-up__close-button" type="button" id="close-pop-up-element"></button>
+      <h2 class="pop-up__heading">Новое место</h2>
+      <form class="form" name="form-element">
+        <input class="form__item" type="text" id="element-name" name="name" placeholder="Название" required>
+        <input class="form__item" type="url" id="element-link" name="link" placeholder="Ссылка на картинку" required>
+        <button class="form__submit-button" type="submit">Создать</button>
       </form>
     </div>
   </div>
