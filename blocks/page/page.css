@@ -16,6 +16,8 @@
   text-rendering: optimizeLegibility;
 
   /* Отладочные свойства */
-  border: 1px red dashed;
+  /* border: 1px red dashed;
+  max-width: 1282px;
+  box-sizing: border-box; */
   /* background-color: #d89292; */
 }

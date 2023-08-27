@@ -27,15 +27,15 @@ const initialCards = [
   },
   {
     name: 'Рускеала',
-    link: './images/place-ruskeala.jpg',
+    link: './images/place-ruskeala-big.jpg',
   },
   {
     name: 'Выборг',
-    link: './images/place-vyborg.jpg',
+    link: './images/place-vyborg-big.jpg',
   },
   {
     name: 'Ястребиное озеро',
-    link: './images/place-yastrebinoye.jpg',
+    link: './images/place-yastrebinoye-big.jpg',
   },
 ]
 
@@ -116,6 +116,7 @@ initialCards.forEach(item => {
   const newCard = createCard(item.name, item.link);
   insertCard(newCard);
 });
+
 
 /* -----Обработчики событий----- */
 // Нажатие на редактирование профиля
