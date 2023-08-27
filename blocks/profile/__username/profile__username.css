@@ -4,7 +4,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: 1.14286;
-  max-width: 85%;
+  /* Если дать абзацу с именем больше процентов ширины, то
+  кнопка редактирования профиля передеет на новую строку на
+  некоторых ширинах экрана */
+  max-width: 81%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

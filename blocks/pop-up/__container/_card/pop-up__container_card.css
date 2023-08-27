@@ -1,0 +1,8 @@
+.pop-up__container_card {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+
+  width: auto;
+  padding: 0;
+}

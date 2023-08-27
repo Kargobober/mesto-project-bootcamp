@@ -60,6 +60,10 @@ const cardsButtonAdd = document.querySelector('.profile__add-button');
 const cardsPopup = document.getElementById('pop-up_element');
 const cardsForm = document.forms['form-element'];
 const cardsButtonClose = cardsPopup.querySelector('.pop-up__close-button');
+const cardPopup = document.getElementById('pop-up_card');
+const cardPopupButtonClose = cardPopup.querySelector('.pop-up__close-button');
+const cardPopupImage = cardPopup.querySelector('.pop-up__image');
+const cardPopupName = cardPopup.querySelector('.pop-up__heading');
 
 
 /* -----Функции----- */
@@ -91,6 +95,13 @@ function createCard(name, imgLink) {
   cardImage.setAttribute('alt', name);
   cardButtonLike.addEventListener('click', evt => evt.target.classList.toggle('element__like-button_checked'));
   cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
+  cardImage.addEventListener('click', evt => {
+    cardPopupButtonClose.addEventListener('click', evt => closePopup(cardPopup));
+    cardPopupImage.setAttribute('src', imgLink);
+    cardPopupImage.setAttribute('alt', name);
+    cardPopupName.textContent = name;
+    openPopup(cardPopup);
+  });
   return newCard;
 }
 
