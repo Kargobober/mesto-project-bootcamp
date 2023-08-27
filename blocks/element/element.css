@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
+  position: relative;
 }
 
 @media screen and (max-width: 414px) {

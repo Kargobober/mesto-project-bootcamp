@@ -84,9 +84,13 @@ function createCard(name, imgLink) {
   const newCard = templateCard.cloneNode(true);
   const cardName = newCard.querySelector('.element__heading');
   const cardImage = newCard.querySelector('.element__image');
+  const cardButtonLike = newCard.querySelector('.element__like-button');
+  const cardButtonDelete = newCard.querySelector('.element__delete-button');
   cardName.textContent = name;
   cardImage.setAttribute('src', imgLink);
   cardImage.setAttribute('alt', name);
+  cardButtonLike.addEventListener('click', evt => evt.target.classList.toggle('element__like-button_checked'));
+  cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
   return newCard;
 }
 
@@ -123,9 +127,9 @@ profileForm.addEventListener('submit', saveProfile);
 
 // Нажатие на плюсик - создать карточку
 cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
-// Нажатие на крестик в попапе карточки
+// Нажатие на крестик в попапе карточки - закрыть редактор карточки
 cardsButtonClose.addEventListener('click', evt => closePopup(cardsPopup));
-// Сохранение в редакторе карточки
+// Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
   const cardName = cardsForm.querySelector('input[name="name"]');

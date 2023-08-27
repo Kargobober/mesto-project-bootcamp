@@ -29,62 +29,7 @@
 
     <section class="elements centered-element">
       <ul class="elements__list">
-        <li class="element">
-          <img class="element__image" src="./images/place-karachaevsk.jpg"
-            alt="Древняя православная церковь в лесистых холмах">
-          <div class="element__info-container">
-            <h3 class="element__heading">Карачаевск</h3>
-            <button class="element__like-button" id="like-place-karachaevsk" name="like-place-karachaevsk"
-              type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/place-ruskeala.jpg"
-            alt="Исскусственное озеро в бывшем карьере. На отвесных берегах растут ели">
-          <div class="element__info-container">
-            <h3 class="element__heading">Рускеала</h3>
-            <button class="element__like-button" id="like-place-ruskeala" name="like-place-ruskeala"
-              type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/place-elbrus.png"
-            alt="Гора Эльбрус вдали, на переднем плане обширная равнина на закате">
-          <div class="element__info-container">
-            <h3 class="element__heading">Гора Эльбрус</h3>
-            <button class="element__like-button" id="like-place-elbrus" name="like-place-elbrus" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/place-dombay.png"
-            alt="Горная территория Домбай, у подножия гор густой смешанный лес">
-          <div class="element__info-container">
-            <h3 class="element__heading">Домбай</h3>
-            <button class="element__like-button" id="like-place-dombay" name="like-place-dombay" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/place-vyborg.jpg"
-            alt="Старинная крепость города Выборг, расположенная на острове посреди залива">
-          <div class="element__info-container">
-            <h3 class="element__heading">Выборг</h3>
-            <button class="element__like-button" id="like-place-vyborg" name="like-place-vyborg" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/place-yastrebinoye.jpg"
-            alt="Озеро посреди смешанного леса. Один из берегов крутой и скалистый, но на нём выросли сосны">
-          <div class="element__info-container">
-            <h3 class="element__heading">Ястребиное озеро</h3>
-            <button class="element__like-button" id="like-place-yastrebinoye" name="like-place-yastrebinoye"
-              type="button"></button>
-          </div>
-        </li>
+        <!-- Наполнение через JS, в том числе через действия пользователя -->
       </ul>
     </section>
   </main>
@@ -119,6 +64,7 @@
 
   <template id="template-element">
     <li class="element">
+      <button class="element__delete-button" type="button"></button>
       <img class="element__image"
         src=""
         alt="">

@@ -1,0 +1,4 @@
+.element__like-button_checked {
+  background-image: url(../../../../images/button-like-active.svg);
+  opacity: 1;
+}

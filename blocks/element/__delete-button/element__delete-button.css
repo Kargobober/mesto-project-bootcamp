@@ -1,0 +1,26 @@
+.element__delete-button {
+  background-color: rgba(0, 0, 0, .1);
+  box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .1);
+  padding: 0;
+  border: 0;
+  width: 18px;
+  height: 19px;
+  background-image: url(../../../images/button-delete-trashcan.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: opacity .2s ease-in;
+  /* Повысим уровень z, иначе урна не реагирует на мышь?????? */
+  /* z-index: 1; */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.element__delete-button:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+.element__delete-button:active {
+  opacity: 1;
+}
