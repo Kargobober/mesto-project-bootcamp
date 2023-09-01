@@ -5,19 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto Russia</title>
-  <link rel="icon" href="./images/favicon-hat.svg">
+  <link rel="icon" href="<%=require('./images/favicon-hat.svg')%>">
 </head>
 
 <body class="page">
 
   <header class="header centered-element">
-    <img class="header__logo" src="./images/logo-mesto-russia.svg"
+    <img class="header__logo" src="<%=require('./images/logo-mesto-russia.svg')%>"
       alt="Логотип сайта в виде надписи &quot;Mesto Russia&quot;">
   </header>
 
   <main class="content">
     <section class="profile centered-element">
-      <img class="profile__avatar" src="./images/user-photo-kusto.jpg" alt="Аватарка пользователя">
+      <img class="profile__avatar" src="<%=require('./images/user-photo-kusto.jpg')%>" alt="Аватарка пользователя">
       <div class="profile__info">
         <h1 class="profile__username">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" id="edit-profile" type="button"></button>

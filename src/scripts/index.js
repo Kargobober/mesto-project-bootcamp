@@ -3,6 +3,11 @@ import './pages/index.css';
 
 /* -----Исходные данные----- */
 // Массив с картиночками
+
+// Для локальных файлов картинок изменим логику получения ссылки
+const imageRuskealaBig = new URL('../images/place-ruskeala-big.jpg', import.meta.url);
+const imageVyborgBig = new URL('../images/place-vyborg-big.jpg', import.meta.url);
+const imageYastrebinoyeBig = new URL('../images/place-yastrebinoye-big.jpg', import.meta.url);
 const initialCards = [
   {
     name: 'Архыз',
@@ -30,15 +35,15 @@ const initialCards = [
   },
   {
     name: 'Рускеала',
-    link: './images/place-ruskeala-big.jpg',
+    link: imageRuskealaBig,
   },
   {
     name: 'Выборг',
-    link: './images/place-vyborg-big.jpg',
+    link: imageVyborgBig,
   },
   {
     name: 'Ястребиное озеро',
-    link: './images/place-yastrebinoye-big.jpg',
+    link: imageYastrebinoyeBig,
   },
 ]
 
