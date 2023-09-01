@@ -2,7 +2,7 @@
   max-width: 68.75%;
   padding: 40px 0 25px;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: flex-start;
   column-gap: 30px;
 }
