@@ -67,6 +67,11 @@ const cardPopup = document.getElementById('pop-up_card');
 const cardPopupButtonClose = cardPopup.querySelector('.pop-up__close-button');
 const cardPopupImage = cardPopup.querySelector('.pop-up__image');
 const cardPopupName = cardPopup.querySelector('.pop-up__heading');
+const userNameModal = profilePopup.querySelector('input[name="name"]');
+const userAboutModal = profilePopup.querySelector('input[name="about"]');
+const closeButtons = document.querySelectorAll('.pop-up__close-button');
+const cardName = cardsForm.querySelector('input[name="name"]');
+const cardLink = cardsForm.querySelector('input[name="link"]');
 
 
 /* -----Функции----- */
@@ -80,9 +85,7 @@ function closePopup(popupElement) {
 
 function saveProfile(evt) {
   evt.preventDefault();
-  const usernameModal = profilePopup.querySelector('input[name="name"]');
-  const userAboutModal = profilePopup.querySelector('input[name="about"]');
-  profileUsername.textContent = usernameModal.value;
+  profileUsername.textContent = userNameModal.value;
   profileAbout.textContent = userAboutModal.value;
   closePopup(profilePopup);
 }
@@ -99,7 +102,6 @@ function createCard(name, imgLink) {
   cardButtonLike.addEventListener('click', evt => evt.target.classList.toggle('element__like-button_checked'));
   cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
   cardImage.addEventListener('click', evt => {
-    cardPopupButtonClose.addEventListener('click', evt => closePopup(cardPopup));
     cardPopupImage.setAttribute('src', imgLink);
     cardPopupImage.setAttribute('alt', name);
     cardPopupName.textContent = name;
@@ -120,13 +122,15 @@ initialCards.forEach(item => {
   insertCard(newCard);
 });
 
+closeButtons.forEach((currentButton) => {
+  const currentPopup = currentButton.closest('.pop-up');
+  currentButton.addEventListener('click', (evt) => closePopup(currentPopup));
+});
 
 /* -----Обработчики событий----- */
 // Нажатие на редактирование профиля
 profileButtonEdit.addEventListener('click', function(evt) {
-  const usernameModal = profilePopup.querySelector('input[name="name"]');
-  const userAboutModal = profilePopup.querySelector('input[name="about"]');
-  usernameModal.value = profileUsername.textContent;
+  userNameModal.value = profileUsername.textContent;
   userAboutModal.value = profileAbout.textContent;
   openPopup(profilePopup);
 });
@@ -147,11 +151,11 @@ cardsButtonClose.addEventListener('click', evt => closePopup(cardsPopup));
 // Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
-  const cardName = cardsForm.querySelector('input[name="name"]');
-  const cardLink = cardsForm.querySelector('input[name="link"]');
   const newCard = createCard(cardName.value, cardLink.value);
   insertCard(newCard);
   closePopup(cardsPopup);
-  cardName.value = '';
-  cardLink.value = '';
+  // Очищаем форму, которая и есть цель события
+  evt.target.reset();
 })
+
+cardPopupButtonClose.addEventListener('click', evt => closePopup(cardPopup));
