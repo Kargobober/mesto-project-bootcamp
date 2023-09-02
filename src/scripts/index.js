@@ -5,6 +5,7 @@ import '../pages/index.css';
 import { initialCards } from './const';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
+import { disableButton, enableValidation } from './validate.js'
 
 
 
@@ -14,9 +15,18 @@ import { openPopup, closePopup } from './modal.js';
 
 
 /* -----Глобальные переменные----- */
+const validationSettings = {
+  inputSelector: '.form__item',
+  buttonSelector: '.form__submit-button',
+  formSelector: '.form',
+  // ↓ Не селектор по классу, а сам класс ↓
+  invalidTextClass: 'form__item_invalid',
+}
 const cards = document.querySelector('.elements__list');
 const cardsButtonAdd = document.querySelector('.profile__add-button');
+// Попап создания карточки
 const cardsPopup = document.getElementById('pop-up_element');
+const cardButtonSubmit = cardsPopup.querySelector(validationSettings.buttonSelector);
 const cardsForm = document.forms['form-element'];
 const cardName = cardsForm.querySelector('input[name="name"]');
 const cardLink = cardsForm.querySelector('input[name="link"]');
@@ -30,8 +40,8 @@ const profileForm = document.forms['form-profile'];
 // Данные о пользователе со страницы (не из формы внутри модального окна)
 const profileUsername = document.querySelector('.profile__username');
 const profileAbout = document.querySelector('.profile__user-about');
-// ??????????????????????КНОПКА НЕ ИСПОЛЬЗУЕТСЯ!!!!!!!!!!!!!!!!!!!
-const profileButtonSave = profileForm.querySelector('.form__submit-button');
+const profileErrorElements = profileForm.querySelectorAll('.form__error-text');
+
 
 
 
@@ -56,6 +66,8 @@ initialCards.forEach(item => {
   insertCard(newCard);
 });
 
+enableValidation(validationSettings);
+
 
 
 /* -----Обработчики событий----- */
@@ -63,6 +75,12 @@ initialCards.forEach(item => {
 profileButtonEdit.addEventListener('click', function(evt) {
   userNameModal.value = profileUsername.textContent;
   userAboutModal.value = profileAbout.textContent;
+  /* При открытии редактора профиля там уже правильные данные,
+  т.к. неверные не могли отправиться при предыдущей валидации
+  Значит, надо очищать тексты ошибок и стили инпутов */
+  userNameModal.classList.remove(validationSettings.invalidTextClass);
+  userAboutModal.classList.remove(validationSettings.invalidTextClass);
+  profileErrorElements.forEach(errorElement => errorElement.textContent = '');
   openPopup(profilePopup);
 });
 
@@ -81,4 +99,5 @@ cardsForm.addEventListener('submit', function(evt) {
   closePopup(cardsPopup);
   // Очищаем форму, которая и есть цель события
   evt.target.reset();
-})
+  disableButton(cardButtonSubmit);
+});

@@ -1,0 +1,22 @@
+.form__error-text {
+  display: block;
+  min-height: 27px;
+  box-sizing: border-box;
+  padding: 2px 0;
+  color: #F00;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 11.5px;
+  /*
+  У самой ошибки верхний и нижний паддинги по 2px
+  У инпута, идущего ниже текста ошибки, есть верхний паддинг 3px
+  30px - расстояние между нижней границей поля и текстом
+  следующего поля (из макета)
+  30 - 2 * 2 - 3 = 23 → /2 = 11.5px на одну строку
+  */
+}
+
+.form__error-text:nth-of-type(2) {
+  margin-bottom: 21px;
+}

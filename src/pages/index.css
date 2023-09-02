@@ -42,5 +42,7 @@
 
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 @import url(../blocks/form/__item/form__item.css);
+@import url(../blocks/form/__item/_invalid/form__item_invalid.css);
+@import url(../blocks/form/__error-text/form__error-text.css);
 
 @import url(../blocks/centered-element/centered-element.css);
