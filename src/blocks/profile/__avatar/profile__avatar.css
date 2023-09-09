@@ -4,4 +4,6 @@
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
   margin-bottom: 26px;
+  object-position: center;
+  object-fit: cover;
 }
