@@ -5,7 +5,7 @@ function showError(input, errorText, settings) {
   input.classList.add(settings.invalidTextClass)
 }
 
-function hideError(input, settings) {
+export function hideError(input, settings) {
   const errorId = 'error-' + input.id;
   const errorElement = document.getElementById(errorId);
   errorElement.textContent = '';
