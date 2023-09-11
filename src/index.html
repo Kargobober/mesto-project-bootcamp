@@ -17,7 +17,10 @@
 
   <main class="content">
     <section class="profile centered-element">
-      <img class="profile__avatar" src="<%=require('./images/user-photo-kusto.jpg')%>" alt="Аватарка пользователя">
+      <div class="profile__avatar-container">
+        <img class="profile__avatar" src="<%=require('./images/user-photo-kusto.jpg')%>" alt="Аватарка пользователя">
+        <button class="profile__edit-avatar-button" type="button"></button>
+      </div>
       <div class="profile__info">
         <h1 class="profile__username">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" id="edit-profile" type="button"></button>
@@ -38,6 +41,7 @@
   </footer>
 
   <div class="pop-up" id="pop-up_profile" tabindex="0">
+    <!-- Добавил tabindex ради переключении фокуса на сам попап при его открытии (см. modal.js → focus) -->
     <div class="pop-up__container">
       <button class="pop-up__close-button" type="button" id="close-pop-up-profile"></button>
       <h2 class="pop-up__heading">Редактировать профиль</h2>
@@ -70,6 +74,18 @@
       <button class="pop-up__close-button" type="button" id="close-pop-up-card"></button>
       <img class="pop-up__image" src="" alt="">
       <h2 class="pop-up__heading pop-up__heading_card"></h2>
+    </div>
+  </div>
+
+  <div class="pop-up" id="pop-up_avatar" tabindex="0">
+    <div class="pop-up__container">
+      <button class="pop-up__close-button" type="button"></button>
+      <h2 class="pop-up__heading">Обновить аватар</h2>
+      <form class="form" name="form-avatar" novalidate>
+        <input class="form__item" type="url" id="avatar-link" name="avatar-link" placeholder="Ссылка на картинку" required>
+        <span class="form__error-text" id="error-avatar-link"></span>
+        <button class="form__submit-button" type="submit">Сохранить</button>
+      </form>
     </div>
   </div>
 

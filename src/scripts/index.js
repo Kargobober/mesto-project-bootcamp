@@ -6,7 +6,7 @@ import { initialCards, validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, hideError } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo } from './api.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar } from './api.js';
 
 
 
@@ -24,28 +24,22 @@ const cardsForm = document.forms['form-element'];
 const cardName = cardsForm.querySelector('input[name="name"]');
 const cardLink = cardsForm.querySelector('input[name="link"]');
 
-const userSettings = {
-  selectorButtonEdit: '.profile__edit-button',
-  idPopup: 'pop-up_profile',
-  selectorUserNameModal: 'input[name="name"]',
-  selectorUserAboutModal: 'input[name="about"]',
-  nameOfForm: 'form-profile',
-  selectorUserName: '.profile__username',
-  selectorUserAbout: '.profile__user-about',
-  selectorErrorElement: '.form__error-text',
-  selectorAvatar: '.profile__avatar',
-}
-const profileButtonEdit = document.querySelector(userSettings.selectorButtonEdit);
-const profilePopup = document.getElementById(userSettings.idPopup);
-const userNameModal = profilePopup.querySelector(userSettings.selectorUserNameModal);
-const userAboutModal = profilePopup.querySelector(userSettings.selectorUserAboutModal);
-// Поиск формы внутри коллекции форм документа
-const profileForm = document.forms[userSettings.nameOfForm];
-// Данные о пользователе со страницы (не из формы внутри модального окна)
-const profileUserName = document.querySelector(userSettings.selectorUserName);
-const profileAbout = document.querySelector(userSettings.selectorUserAbout);
-const profileAvatarElement = document.querySelector(userSettings.selectorAvatar);
 
+const profileButtonEdit = document.querySelector('.profile__edit-button');
+const profilePopup = document.getElementById('pop-up_profile');
+const userNameModal = profilePopup.querySelector('input[name="name"]');
+const userAboutModal = profilePopup.querySelector('input[name="about"]');
+// Поиск формы внутри коллекции форм документа
+const profileForm = document.forms['form-profile'];
+// Данные о пользователе со страницы (не из формы внутри модального окна)
+const profileUserName = document.querySelector('.profile__username');
+const profileAbout = document.querySelector('.profile__user-about');
+const profileAvatarContainer = document.querySelector('.profile__avatar-container');
+const profileAvatarElement = document.querySelector('.profile__avatar');
+const profileAvatarPopup = document.getElementById('pop-up_avatar');
+const profileAvatarForm = document.forms['form-avatar'];
+// Ниже сохраняю в переменную тег input, в который вносят ссылку на картинку аватарки
+const profileAvatarLinkModal = profileAvatarForm.elements['avatar-link'];
 
 /* -----Функции----- */
 function insertCard(item) {
@@ -123,3 +117,20 @@ profileButtonEdit.addEventListener('click', function(evt) {
 // Сохранение в редакторе профиля
   // Вешаем слушателя не на кнопку, а на форму целиком!
 profileForm.addEventListener('submit', saveProfile);
+
+// Нажатие на аватарку
+profileAvatarContainer.addEventListener('click', (evt) => openPopup(profileAvatarPopup));
+// Сохранение в редакторе аватарки
+profileAvatarForm.addEventListener('submit', evt => {
+  evt.preventDefault();
+  // Почему-то нужно передавать в аргумент value тега input. Т.е. нельзя сохранить в переменную profileAvatarLinkModal сразу value.
+  // Наверное потому что нам надо свежее значение value. При загрузке страницы value пустой, и именно пустая строка запишется в переменную
+  sendProfileAvatar(profileAvatarLinkModal.value)
+  .then(handleResponse)
+  .then(data => {
+    profileAvatarElement.src = data.avatar;
+    closePopup(profileAvatarPopup);
+    evt.target.reset();
+  })
+  .catch(handleInvalidResponse);
+  });

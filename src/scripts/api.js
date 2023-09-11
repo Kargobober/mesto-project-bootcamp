@@ -34,3 +34,13 @@ export const sendProfileInfo = (nameValue, aboutValue) => {
     }),
   })
 }
+
+export const sendProfileAvatar = (avatarLink) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    headers: config.headers,
+    method: 'PATCH',
+    body: JSON.stringify({
+      avatar: avatarLink,
+    }),
+  })
+}
