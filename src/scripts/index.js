@@ -6,7 +6,7 @@ import { validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, hideError } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard } from './api.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, sendLike } from './api.js';
 
 
 
@@ -83,10 +83,13 @@ getCards()
 .then(handleResponse)
 .then(data => {
   data.forEach(item => {
-    const newCard = createCard(item.name, item.link);
-    const cardLikeCounter = newCard.querySelector('.element__like-counter');
-    cardLikeCounter.textContent = item.likes.length;
-    insertCard(newCard);
+    const newCard = createCard(item.name, item.link, item._id);
+    newCard.likes = item.likes;
+    newCard.likeCounter.textContent = newCard.likes.length;
+    if (newCard.likes.findIndex(item => item.name === profileUserName.textContent) > -1) {
+      newCard.buttonLike.classList.add('element__like-button_checked');
+    }
+    insertCard(newCard.markup);
   })
 })
 .catch(handleInvalidResponse);
@@ -99,16 +102,18 @@ cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
 // Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
+
   sendCard(cardName.value, cardLink.value)
   .then(handleResponse)
   .then(data => {
-    const newCard = createCard(data.name, data.link);
-    insertCard(newCard);
+    const newCard = createCard(data.name, data.link, data._id);
+    insertCard(newCard.markup);
     closePopup(cardsPopup);
     // Очищаем форму, которая и есть цель события
     evt.target.reset();
     disableButton(cardButtonSubmit);
   })
+  .catch(handleInvalidResponse);
 });
 
 // Открывание редактора профиля
