@@ -2,11 +2,11 @@
 // Данный импорт работает только с Вебпаком
 import '../pages/index.css';
 
-import { initialCards, validationSettings } from './const.js';
+import { validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, hideError } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar } from './api.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard } from './api.js';
 
 
 
@@ -23,7 +23,6 @@ const cardButtonSubmit = cardsPopup.querySelector(validationSettings.buttonSelec
 const cardsForm = document.forms['form-element'];
 const cardName = cardsForm.querySelector('input[name="name"]');
 const cardLink = cardsForm.querySelector('input[name="link"]');
-
 
 const profileButtonEdit = document.querySelector('.profile__edit-button');
 const profilePopup = document.getElementById('pop-up_profile');
@@ -70,11 +69,6 @@ function saveProfile(evt) {
 
 
 /* -----Логика----- */
-// Динамическое создание карточек из массива
-initialCards.forEach(item => {
-  const newCard = createCard(item.name, item.link);
-  insertCard(newCard);
-});
 
 enableValidation(validationSettings);
 
@@ -85,6 +79,17 @@ getProfileInfo()
   })
   .catch(handleInvalidResponse);
 
+getCards()
+.then(handleResponse)
+.then(data => {
+  data.forEach(item => {
+    const newCard = createCard(item.name, item.link);
+    const cardLikeCounter = newCard.querySelector('.element__like-counter');
+    cardLikeCounter.textContent = item.likes.length;
+    insertCard(newCard);
+  })
+})
+.catch(handleInvalidResponse);
 
 
 /* -----Обработчики событий----- */
@@ -94,12 +99,16 @@ cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
 // Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  const newCard = createCard(cardName.value, cardLink.value);
-  insertCard(newCard);
-  closePopup(cardsPopup);
-  // Очищаем форму, которая и есть цель события
-  evt.target.reset();
-  disableButton(cardButtonSubmit);
+  sendCard(cardName.value, cardLink.value)
+  .then(handleResponse)
+  .then(data => {
+    const newCard = createCard(data.name, data.link);
+    insertCard(newCard);
+    closePopup(cardsPopup);
+    // Очищаем форму, которая и есть цель события
+    evt.target.reset();
+    disableButton(cardButtonSubmit);
+  })
 });
 
 // Открывание редактора профиля

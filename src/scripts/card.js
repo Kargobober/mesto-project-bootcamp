@@ -1,3 +1,4 @@
+import { sendLike } from './api.js';
 import { cardPopup, preparePopupCard, openPopup } from './modal.js';
 
 
@@ -16,7 +17,9 @@ export function createCard(name, imgLink) {
   cardName.textContent = name;
   cardImage.setAttribute('src', imgLink);
   cardImage.setAttribute('alt', name);
-  cardButtonLike.addEventListener('click', evt => evt.target.classList.toggle('element__like-button_checked'));
+  cardButtonLike.addEventListener('click', evt => {
+    evt.target.classList.toggle('element__like-button_checked')
+  });
   cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
   cardImage.addEventListener('click', evt => {
     preparePopupCard(name, imgLink);

@@ -44,3 +44,27 @@ export const sendProfileAvatar = (avatarLink) => {
     }),
   })
 }
+
+export const getCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  })
+}
+
+export const sendCard = (nameValue, linkValue) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+    method: 'POST',
+    body: JSON.stringify({
+      name: nameValue,
+      link: linkValue,
+    })
+  })
+}
+
+export const sendLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: 'PUT',
+  })
+}

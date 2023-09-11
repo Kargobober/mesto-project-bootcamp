@@ -7,7 +7,6 @@
   background-image: url(../../../images/button-like.svg);
   background-size: contain;
   background-repeat: no-repeat;
-  margin-right: 5px;
   flex-shrink: 0;
   transition: background-image .4s ease-in;
   transition: opacity .2s ease-in;
