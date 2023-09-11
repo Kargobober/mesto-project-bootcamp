@@ -16,7 +16,7 @@ export const handleResponse = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    return Promise.reject(`Ошибка ${response.status}: ${response.statusText}.`);
+    return Promise.reject(`Ошибка ${response.status}: ${response}.`);
   }
 }
 
@@ -66,5 +66,12 @@ export const sendLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     headers: config.headers,
     method: 'PUT',
+  })
+}
+
+export const deleteLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: 'DELETE',
   })
 }

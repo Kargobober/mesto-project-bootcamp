@@ -1,4 +1,4 @@
-import { sendLike } from './api.js';
+import { handleInvalidResponse, handleResponse, sendLike, deleteLike } from './api.js';
 import { cardPopup, preparePopupCard, openPopup } from './modal.js';
 
 
@@ -8,22 +8,45 @@ const templateCard = document.getElementById('template-element').content.querySe
 
 
 
-export function createCard(name, imgLink) {
-  const newCard = templateCard.cloneNode(true);
-  const cardName = newCard.querySelector('.element__heading');
-  const cardImage = newCard.querySelector('.element__image');
-  const cardButtonLike = newCard.querySelector('.element__like-button');
-  const cardButtonDelete = newCard.querySelector('.element__delete-button');
+export function createCard(name, imgLink, id) {
+  const newCard = {};
+  newCard._id = id;
+  newCard.markup = templateCard.cloneNode(true);
+  const cardName = newCard.markup.querySelector('.element__heading');
+  const cardImage = newCard.markup.querySelector('.element__image');
+  newCard.buttonLike = newCard.markup.querySelector('.element__like-button');
+  const cardButtonDelete = newCard.markup.querySelector('.element__delete-button');
+  newCard.likeCounter = newCard.markup.querySelector('.element__like-counter');
+
   cardName.textContent = name;
   cardImage.setAttribute('src', imgLink);
   cardImage.setAttribute('alt', name);
-  cardButtonLike.addEventListener('click', evt => {
-    evt.target.classList.toggle('element__like-button_checked')
-  });
   cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
+    newCard.buttonLike.addEventListener('click', evt => {
+      if (!newCard.buttonLike.classList.contains('element__like-button_checked')) {
+        sendLike(newCard._id)
+        .then(handleResponse)
+        .then(data => {
+          newCard.likes = data.likes;
+          newCard.likeCounter.textContent = newCard.likes.length;
+          evt.target.classList.add('element__like-button_checked');
+        })
+        .catch(handleInvalidResponse);
+      } else {
+        deleteLike(newCard._id)
+        .then(handleResponse)
+        .then(data => {
+          newCard.likes = data.likes;
+          newCard.likeCounter.textContent = newCard.likes.length;
+          evt.target.classList.remove('element__like-button_checked');
+        })
+        .catch(handleInvalidResponse);
+      }
+    });
   cardImage.addEventListener('click', evt => {
     preparePopupCard(name, imgLink);
     openPopup(cardPopup);
   });
+
   return newCard;
 }
