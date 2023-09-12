@@ -6,7 +6,8 @@ import { validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, hideError } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, sendLike } from './api.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard } from './api.js';
+
 
 
 
@@ -39,6 +40,8 @@ const profileAvatarPopup = document.getElementById('pop-up_avatar');
 const profileAvatarForm = document.forms['form-avatar'];
 // Ниже сохраняю в переменную тег input, в который вносят ссылку на картинку аватарки
 const profileAvatarLinkModal = profileAvatarForm.elements['avatar-link'];
+let userId = '';
+
 
 /* -----Функции----- */
 function insertCard(item) {
@@ -72,27 +75,32 @@ function saveProfile(evt) {
 
 enableValidation(validationSettings);
 
+// Объединили промисы в одну цепочку, иначе при получении карточек,
+// когда идет проверка наличия пользователя в массиве лайкнувших – его айди ещё не определён первым промисом
 getProfileInfo()
   .then(handleResponse)
   .then((data) => {
     updateLocalProfile(data.name, data.about, data.avatar);
+    userId = data._id;
+  })
+  // Второй промис (по сути третий :)))) )
+  .then(getCards)
+  .then(handleResponse)
+  .then(data => {
+    data.forEach(item => {
+      const newCard = createCard(item.name, item.link, item._id);
+      newCard.likes = item.likes;
+      newCard.likeCounter.textContent = newCard.likes.length;
+      // В массиве likes содержатся объекты. Каждый объект - представление пользователя.
+      // У пользователя есть свойство id - не карточки, а самого человека. К нему и обращаемся ниже
+      // Id пользователя получаем при ответе сервера про данные пользователя (getProfileInfo)
+      if (newCard.likes.findIndex(item => item._id === userId) > -1) {
+        newCard.buttonLike.classList.add('element__like-button_checked');
+      }
+      insertCard(newCard.markup);
+    })
   })
   .catch(handleInvalidResponse);
-
-getCards()
-.then(handleResponse)
-.then(data => {
-  data.forEach(item => {
-    const newCard = createCard(item.name, item.link, item._id);
-    newCard.likes = item.likes;
-    newCard.likeCounter.textContent = newCard.likes.length;
-    if (newCard.likes.findIndex(item => item.name === profileUserName.textContent) > -1) {
-      newCard.buttonLike.classList.add('element__like-button_checked');
-    }
-    insertCard(newCard.markup);
-  })
-})
-.catch(handleInvalidResponse);
 
 
 /* -----Обработчики событий----- */

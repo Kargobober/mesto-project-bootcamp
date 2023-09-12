@@ -10,6 +10,7 @@ const templateCard = document.getElementById('template-element').content.querySe
 
 export function createCard(name, imgLink, id) {
   const newCard = {};
+  // id карточки
   newCard._id = id;
   newCard.markup = templateCard.cloneNode(true);
   const cardName = newCard.markup.querySelector('.element__heading');

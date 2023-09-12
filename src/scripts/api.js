@@ -13,10 +13,11 @@ export const getProfileInfo = () => {
 }
 
 export const handleResponse = (response) => {
+  console.log(response);
   if (response.ok) {
     return response.json();
   } else {
-    return Promise.reject(`Ошибка ${response.status}: ${response}.`);
+    return Promise.reject(`Ошибка ${response.status}.`);
   }
 }
 
