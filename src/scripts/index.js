@@ -5,8 +5,8 @@ import '../pages/index.css';
 import { validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
-import { disableButton, enableValidation, hideError } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard } from './api.js';
+import { disableButton, enableValidation, hideError, resetRenderValidation } from './validate.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, renderLoading, removeRenderLoading } from './api.js';
 
 
 
@@ -43,6 +43,7 @@ const profileAvatarLinkModal = profileAvatarForm.elements['avatar-link'];
 let userId = '';
 
 
+
 /* -----Функции----- */
 function insertCard(item) {
   cards.prepend(item);
@@ -52,21 +53,23 @@ function insertCard(item) {
 function updateLocalProfile(name, about, avatar) {
   profileUserName.textContent = name;
   profileAbout.textContent = about;
-  if (avatar === undefined) {} else {
+  if (avatar === undefined) { } else {
     profileAvatarElement.src = avatar;
   }
 }
 
 // Обновление профиля данными от пользователя (из модального окна)
 function saveProfile(evt) {
+  renderLoading(evt.submitter, '...');
   evt.preventDefault();
   sendProfileInfo(userNameModal.value, userAboutModal.value)
-  .then(handleResponse)
-  .then((data) => {
-    updateLocalProfile(data.name, data.about);
-    closePopup(profilePopup);
-  })
-  .catch(handleInvalidResponse);
+    .then(handleResponse)
+    .then((data) => {
+      updateLocalProfile(data.name, data.about);
+      closePopup(profilePopup);
+    })
+    .catch(handleInvalidResponse)
+    .finally(res => removeRenderLoading(evt.submitter, '...'));
 }
 
 
@@ -106,56 +109,61 @@ getProfileInfo()
   .catch(handleInvalidResponse);
 
 
+
 /* -----Обработчики событий----- */
-// Нажатие на плюсик - создать карточку
+// Нажатие на плюсик - открыть редактор создания карточки
 cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
 
 // Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function (evt) {
+  renderLoading(evt.submitter, '...');
   evt.preventDefault();
 
   sendCard(cardName.value, cardLink.value)
-  .then(handleResponse)
-  .then(data => {
-    const newCard = createCard(data.name, data.link, data._id);
-    insertCard(newCard.markup);
-    closePopup(cardsPopup);
-    // Очищаем форму, которая и есть цель события
-    evt.target.reset();
-    disableButton(cardButtonSubmit);
-  })
-  .catch(handleInvalidResponse);
+    .then(handleResponse)
+    .then(data => {
+      const newCard = createCard(data.name, data.link, data._id);
+      insertCard(newCard.markup);
+      closePopup(cardsPopup);
+      // Очищаем форму, которая и есть цель события
+      evt.target.reset();
+      disableButton(cardButtonSubmit);
+    })
+    .catch(handleInvalidResponse)
+    .finally(res => removeRenderLoading(evt.submitter, '...'));
 });
 
 // Открывание редактора профиля
-profileButtonEdit.addEventListener('click', function(evt) {
+profileButtonEdit.addEventListener('click', function (evt) {
   userNameModal.value = profileUserName.textContent;
   userAboutModal.value = profileAbout.textContent;
   /* При открытии редактора профиля там уже правильные данные,
   т.к. неверные не могли отправиться при предыдущей валидации
   Значит, надо очищать тексты ошибок и стили инпутов */
-  hideError(userNameModal, validationSettings);
-  hideError(userAboutModal, validationSettings);
+  resetRenderValidation(profileForm, validationSettings);
   openPopup(profilePopup);
 });
 
 // Сохранение в редакторе профиля
-  // Вешаем слушателя не на кнопку, а на форму целиком!
+// Вешаем слушателя не на кнопку, а на форму целиком!
 profileForm.addEventListener('submit', saveProfile);
 
 // Нажатие на аватарку
 profileAvatarContainer.addEventListener('click', (evt) => openPopup(profileAvatarPopup));
 // Сохранение в редакторе аватарки
 profileAvatarForm.addEventListener('submit', evt => {
+  renderLoading(evt.submitter, '...');
   evt.preventDefault();
   // Почему-то нужно передавать в аргумент value тега input. Т.е. нельзя сохранить в переменную profileAvatarLinkModal сразу value.
   // Наверное потому что нам надо свежее значение value. При загрузке страницы value пустой, и именно пустая строка запишется в переменную
   sendProfileAvatar(profileAvatarLinkModal.value)
-  .then(handleResponse)
-  .then(data => {
-    profileAvatarElement.src = data.avatar;
-    closePopup(profileAvatarPopup);
-    evt.target.reset();
-  })
-  .catch(handleInvalidResponse);
-  });
+    .then(handleResponse)
+    .then(data => {
+      profileAvatarElement.src = data.avatar;
+      closePopup(profileAvatarPopup);
+      evt.target.reset();
+      resetRenderValidation(evt.target, validationSettings);
+    })
+    .catch(handleInvalidResponse)
+    .finally(res => removeRenderLoading(evt.submitter, '...'));
+});

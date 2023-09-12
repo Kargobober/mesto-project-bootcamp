@@ -56,3 +56,8 @@ formList.forEach((formElement) => {
   setEventListeners(formElement, settings);
 });
 }
+
+export const resetRenderValidation = function (formElement, settings) {
+  formElement.querySelectorAll('input').forEach(input => hideError(input, settings));
+  disableButton(formElement.querySelector(settings.buttonSelector));
+}

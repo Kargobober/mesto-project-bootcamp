@@ -82,3 +82,19 @@ export const deleteCard = (cardId) => {
     method: 'DELETE',
   })
 }
+
+function createRegExp (searchValue) {
+  // Первый обратный слэш экранирует второй обратный, чтобы второй считывался как собственно обратный слэш, чтобы в дальнеёшем экранировать
+  // переданные функции символы на тот случай, если они являются регулярными. А я как разу использую точки
+  const myRegExp = new RegExp (`\\${searchValue}`);
+  return myRegExp;
+}
+
+export const renderLoading = (button, content) => {
+  button.textContent += content;
+}
+
+export const removeRenderLoading = (button, contentForDeleting) => {
+  const myRegExp = createRegExp(contentForDeleting);
+  button.textContent = button.textContent.replace(myRegExp, '');
+}
