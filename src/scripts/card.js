@@ -1,4 +1,4 @@
-import { handleInvalidResponse, handleResponse, sendLike, deleteLike } from './api.js';
+import { handleInvalidResponse, handleResponse, sendLike, deleteLike, deleteCard } from './api.js';
 import { cardPopup, preparePopupCard, openPopup } from './modal.js';
 
 
@@ -16,16 +16,21 @@ export function createCard(name, imgLink, id) {
   const cardName = newCard.markup.querySelector('.element__heading');
   const cardImage = newCard.markup.querySelector('.element__image');
   newCard.buttonLike = newCard.markup.querySelector('.element__like-button');
-  const cardButtonDelete = newCard.markup.querySelector('.element__delete-button');
+  newCard.buttonDelete = newCard.markup.querySelector('.element__delete-button');
   newCard.likeCounter = newCard.markup.querySelector('.element__like-counter');
 
   cardName.textContent = name;
   cardImage.setAttribute('src', imgLink);
   cardImage.setAttribute('alt', name);
-  cardButtonDelete.addEventListener('click', evt => evt.target.closest('.element').remove());
-    newCard.buttonLike.addEventListener('click', evt => {
-      if (!newCard.buttonLike.classList.contains('element__like-button_checked')) {
-        sendLike(newCard._id)
+  newCard.buttonDelete.addEventListener('click', evt => {
+    deleteCard(id)
+    .then(handleResponse)
+    .then(data => evt.target.closest('.element').remove())
+    .catch(handleInvalidResponse)
+  });
+  newCard.buttonLike.addEventListener('click', evt => {
+    if (!newCard.buttonLike.classList.contains('element__like-button_checked')) {
+      sendLike(newCard._id)
         .then(handleResponse)
         .then(data => {
           newCard.likes = data.likes;
@@ -33,8 +38,8 @@ export function createCard(name, imgLink, id) {
           evt.target.classList.add('element__like-button_checked');
         })
         .catch(handleInvalidResponse);
-      } else {
-        deleteLike(newCard._id)
+    } else {
+      deleteLike(newCard._id)
         .then(handleResponse)
         .then(data => {
           newCard.likes = data.likes;
@@ -42,8 +47,8 @@ export function createCard(name, imgLink, id) {
           evt.target.classList.remove('element__like-button_checked');
         })
         .catch(handleInvalidResponse);
-      }
-    });
+    }
+  });
   cardImage.addEventListener('click', evt => {
     preparePopupCard(name, imgLink);
     openPopup(cardPopup);

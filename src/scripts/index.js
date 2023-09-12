@@ -97,6 +97,9 @@ getProfileInfo()
       if (newCard.likes.findIndex(item => item._id === userId) > -1) {
         newCard.buttonLike.classList.add('element__like-button_checked');
       }
+      if (!(item.owner._id === userId)) {
+        newCard.buttonDelete.remove();
+      }
       insertCard(newCard.markup);
     })
   })

@@ -13,7 +13,6 @@ export const getProfileInfo = () => {
 }
 
 export const handleResponse = (response) => {
-  console.log(response);
   if (response.ok) {
     return response.json();
   } else {
@@ -72,6 +71,13 @@ export const sendLike = (cardId) => {
 
 export const deleteLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: 'DELETE',
+  })
+}
+
+export const deleteCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     headers: config.headers,
     method: 'DELETE',
   })
