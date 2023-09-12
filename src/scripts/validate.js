@@ -21,7 +21,7 @@ function checkField(input, settings) {
   }
 }
 
-function enableButton(button) {
+export function enableButton(button) {
   button.disabled = false;
 }
 

@@ -2,11 +2,11 @@
 // Данный импорт работает только с Вебпаком
 import '../pages/index.css';
 
-import { validationSettings } from './const.js';
+import { cardForDeletion, deletionPopup, validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, resetRenderValidation } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, changeButtonText } from './api.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, changeButtonText, deleteCard } from './api.js';
 
 
 
@@ -41,6 +41,7 @@ const profileAvatarForm = document.forms['form-avatar'];
 // Ниже сохраняю в переменную тег input, в который вносят ссылку на картинку аватарки
 const profileAvatarLinkModal = profileAvatarForm.elements['avatar-link'];
 let userId = '';
+const deletionForm = deletionPopup.querySelector('.form');
 
 
 
@@ -167,3 +168,18 @@ profileAvatarForm.addEventListener('submit', evt => {
     .catch(handleInvalidResponse)
     .finally(res => changeButtonText(evt.submitter, 'Сохранить'));
 });
+
+deletionForm.addEventListener('submit', evt => {
+  evt.preventDefault();
+  changeButtonText(evt.submitter, 'Удаление...');
+  deleteCard(cardForDeletion._id)
+    .then(handleResponse)
+    .then(data => cardForDeletion.markup.remove())
+    .catch(handleInvalidResponse)
+    .finally(data => {
+      cardForDeletion.markup = '';
+      cardForDeletion._id = '';
+      closePopup(deletionPopup);
+      changeButtonText(evt.submitter, 'Да');
+    })
+})

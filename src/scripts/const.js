@@ -1,4 +1,3 @@
-/* -----Исходные данные----- */
 export const validationSettings = {
   inputSelector: '.form__item',
   buttonSelector: '.form__submit-button',
@@ -6,3 +5,6 @@ export const validationSettings = {
   // ↓ Не селектор по классу, а сам класс ↓
   invalidTextClass: 'form__item_invalid',
 }
+
+export let cardForDeletion = {};
+export const deletionPopup = document.getElementById('pop-up_deletion');

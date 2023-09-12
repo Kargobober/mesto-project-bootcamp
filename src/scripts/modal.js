@@ -1,3 +1,5 @@
+import { cardForDeletion } from "./const";
+
 const closeButtons = document.querySelectorAll('.pop-up__close-button');
 // Попап просмотра карточки на фулскрин
 export const cardPopup = document.getElementById('pop-up_card');
@@ -49,7 +51,13 @@ function closeInOverlay (evt, popupElement) {
 файл скрипта после сборки вебпаком */
 closeButtons.forEach((currentButton) => {
   const currentPopup = currentButton.closest('.pop-up');
-  currentButton.addEventListener('click', (evt) => closePopup(currentPopup));
+  currentButton.addEventListener('click', (evt) => {
+    if (currentPopup.id === 'pop-up_deletion') {
+      cardForDeletion.markup = '';
+      cardForDeletion._id = '';
+    }
+    closePopup(currentPopup);
+  });
 });
 
 /* Нужно именно mousedown, иначе для click:

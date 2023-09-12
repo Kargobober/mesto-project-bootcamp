@@ -1,5 +1,7 @@
 import { handleInvalidResponse, handleResponse, sendLike, deleteLike, deleteCard } from './api.js';
+import { cardForDeletion, deletionPopup, validationSettings } from './const.js';
 import { cardPopup, preparePopupCard, openPopup } from './modal.js';
+import { enableButton } from './validate.js';
 
 
 
@@ -23,10 +25,10 @@ export function createCard(name, imgLink, id) {
   cardImage.setAttribute('src', imgLink);
   cardImage.setAttribute('alt', name);
   newCard.buttonDelete.addEventListener('click', evt => {
-    deleteCard(id)
-    .then(handleResponse)
-    .then(data => evt.target.closest('.element').remove())
-    .catch(handleInvalidResponse)
+    cardForDeletion._id = id;
+    cardForDeletion.markup = newCard.markup;
+    enableButton(deletionPopup.querySelector(validationSettings.buttonSelector));
+    openPopup(deletionPopup);
   });
   newCard.buttonLike.addEventListener('click', evt => {
     if (!newCard.buttonLike.classList.contains('element__like-button_checked')) {
