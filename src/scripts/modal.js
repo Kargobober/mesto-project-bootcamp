@@ -21,7 +21,7 @@ export function closePopup(popupElement) {
 /* В данной функции вместо openedPopup мы не обращаемся к
 popupElement функций closePopup или openPopup, т.к.
 closeByEsc не видит данные переменные */
-function closeByEsc (evt) {
+function closeByEsc(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.pop-up_opened');
     closePopup(openedPopup);
@@ -34,13 +34,13 @@ export function openPopup(popupElement) {
   popupElement.focus();
 }
 
-export function preparePopupCard (name, imgLink) {
+export function preparePopupCard(name, imgLink) {
   cardPopupImage.setAttribute('src', imgLink);
   cardPopupImage.setAttribute('alt', name);
   cardPopupName.textContent = name;
 }
 
-function closeInOverlay (evt, popupElement) {
+function closeInOverlay(evt, popupElement) {
   if (evt.target.classList.contains('pop-up')) closePopup(popupElement);
 }
 

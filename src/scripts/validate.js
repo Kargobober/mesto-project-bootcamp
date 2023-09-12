@@ -51,10 +51,10 @@ function setEventListeners(formElement, settings) {
 }
 
 export const enableValidation = function (settings) {
-const formList = document.querySelectorAll(settings.formSelector);
-formList.forEach((formElement) => {
-  setEventListeners(formElement, settings);
-});
+  const formList = document.querySelectorAll(settings.formSelector);
+  formList.forEach((formElement) => {
+    setEventListeners(formElement, settings);
+  });
 }
 
 export const resetRenderValidation = function (formElement, settings) {
