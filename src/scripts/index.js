@@ -5,8 +5,8 @@ import '../pages/index.css';
 import { validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
-import { disableButton, enableValidation, hideError, resetRenderValidation } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, renderLoading, removeRenderLoading } from './api.js';
+import { disableButton, enableValidation, resetRenderValidation } from './validate.js';
+import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, changeButtonText } from './api.js';
 
 
 
@@ -60,7 +60,7 @@ function updateLocalProfile(name, about, avatar) {
 
 // Обновление профиля данными от пользователя (из модального окна)
 function saveProfile(evt) {
-  renderLoading(evt.submitter, '...');
+  changeButtonText(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   sendProfileInfo(userNameModal.value, userAboutModal.value)
     .then(handleResponse)
@@ -69,7 +69,7 @@ function saveProfile(evt) {
       closePopup(profilePopup);
     })
     .catch(handleInvalidResponse)
-    .finally(res => removeRenderLoading(evt.submitter, '...'));
+    .finally(res => changeButtonText(evt.submitter, 'Сохранить'));
 }
 
 
@@ -116,7 +116,7 @@ cardsButtonAdd.addEventListener('click', evt => openPopup(cardsPopup));
 
 // Сохранение в редакторе карточки - создать карточку
 cardsForm.addEventListener('submit', function (evt) {
-  renderLoading(evt.submitter, '...');
+  changeButtonText(evt.submitter, 'Создание...');
   evt.preventDefault();
 
   sendCard(cardName.value, cardLink.value)
@@ -130,7 +130,7 @@ cardsForm.addEventListener('submit', function (evt) {
       disableButton(cardButtonSubmit);
     })
     .catch(handleInvalidResponse)
-    .finally(res => removeRenderLoading(evt.submitter, '...'));
+    .finally(res => changeButtonText(evt.submitter, 'Создать'));
 });
 
 // Открывание редактора профиля
@@ -152,7 +152,7 @@ profileForm.addEventListener('submit', saveProfile);
 profileAvatarContainer.addEventListener('click', (evt) => openPopup(profileAvatarPopup));
 // Сохранение в редакторе аватарки
 profileAvatarForm.addEventListener('submit', evt => {
-  renderLoading(evt.submitter, '...');
+  changeButtonText(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   // Почему-то нужно передавать в аргумент value тега input. Т.е. нельзя сохранить в переменную profileAvatarLinkModal сразу value.
   // Наверное потому что нам надо свежее значение value. При загрузке страницы value пустой, и именно пустая строка запишется в переменную
@@ -165,5 +165,5 @@ profileAvatarForm.addEventListener('submit', evt => {
       resetRenderValidation(evt.target, validationSettings);
     })
     .catch(handleInvalidResponse)
-    .finally(res => removeRenderLoading(evt.submitter, '...'));
+    .finally(res => changeButtonText(evt.submitter, 'Сохранить'));
 });

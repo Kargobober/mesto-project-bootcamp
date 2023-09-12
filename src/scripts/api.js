@@ -90,11 +90,6 @@ function createRegExp (searchValue) {
   return myRegExp;
 }
 
-export const renderLoading = (button, content) => {
-  button.textContent += content;
-}
-
-export const removeRenderLoading = (button, contentForDeleting) => {
-  const myRegExp = createRegExp(contentForDeleting);
-  button.textContent = button.textContent.replace(myRegExp, '');
+export const changeButtonText = (button, text) => {
+  button.textContent = text;
 }
