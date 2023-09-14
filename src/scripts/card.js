@@ -1,7 +1,8 @@
-import { handleInvalidResponse, handleResponse, sendLike, deleteLike, deleteCard } from './api.js';
+import { sendLike, deleteLike } from './api.js';
 import { cardForDeletion, deletionPopup, validationSettings } from './const.js';
 import { cardPopup, preparePopupCard, openPopup } from './modal.js';
 import { enableButton } from './validate.js';
+import { handleInvalidResponse } from './utils.js';
 
 
 
@@ -33,7 +34,6 @@ export function createCard(name, imgLink, id) {
   newCard.buttonLike.addEventListener('click', evt => {
     if (!newCard.buttonLike.classList.contains('element__like-button_checked')) {
       sendLike(newCard._id)
-        .then(handleResponse)
         .then(data => {
           newCard.likes = data.likes;
           newCard.likeCounter.textContent = newCard.likes.length;
@@ -42,7 +42,6 @@ export function createCard(name, imgLink, id) {
         .catch(handleInvalidResponse);
     } else {
       deleteLike(newCard._id)
-        .then(handleResponse)
         .then(data => {
           newCard.likes = data.likes;
           newCard.likeCounter.textContent = newCard.likes.length;

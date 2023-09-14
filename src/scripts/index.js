@@ -6,7 +6,8 @@ import { cardForDeletion, deletionPopup, validationSettings } from './const.js';
 import { createCard } from './card.js';
 import { openPopup, closePopup } from './modal.js';
 import { disableButton, enableValidation, resetRenderValidation } from './validate.js';
-import { getProfileInfo, handleResponse, handleInvalidResponse, sendProfileInfo, sendProfileAvatar, getCards, sendCard, changeButtonText, deleteCard } from './api.js';
+import { getProfileInfo, sendProfileInfo, sendProfileAvatar, getCards, sendCard, deleteCard } from './api.js';
+import { handleInvalidResponse, changeButtonText } from './utils.js';
 
 
 
@@ -64,7 +65,6 @@ function saveProfile(evt) {
   changeButtonText(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   sendProfileInfo(userNameModal.value, userAboutModal.value)
-    .then(handleResponse)
     .then((data) => {
       updateLocalProfile(data.name, data.about);
       closePopup(profilePopup);
@@ -82,14 +82,12 @@ enableValidation(validationSettings);
 // Объединили промисы в одну цепочку, иначе при получении карточек,
 // когда идет проверка наличия пользователя в массиве лайкнувших – его айди ещё не определён первым промисом
 getProfileInfo()
-  .then(handleResponse)
   .then((data) => {
     updateLocalProfile(data.name, data.about, data.avatar);
     userId = data._id;
   })
   // Второй промис (по сути третий :)))) )
   .then(getCards)
-  .then(handleResponse)
   .then(data => {
     data.forEach(item => {
       const newCard = createCard(item.name, item.link, item._id);
@@ -121,7 +119,6 @@ cardsForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
   sendCard(cardName.value, cardLink.value)
-    .then(handleResponse)
     .then(data => {
       const newCard = createCard(data.name, data.link, data._id);
       insertCard(newCard.markup);
@@ -158,7 +155,6 @@ profileAvatarForm.addEventListener('submit', evt => {
   // Почему-то нужно передавать в аргумент value тега input. Т.е. нельзя сохранить в переменную profileAvatarLinkModal сразу value.
   // Наверное потому что нам надо свежее значение value. При загрузке страницы value пустой, и именно пустая строка запишется в переменную
   sendProfileAvatar(profileAvatarLinkModal.value)
-    .then(handleResponse)
     .then(data => {
       profileAvatarElement.src = data.avatar;
       closePopup(profileAvatarPopup);
@@ -173,7 +169,6 @@ deletionForm.addEventListener('submit', evt => {
   evt.preventDefault();
   changeButtonText(evt.submitter, 'Удаление...');
   deleteCard(cardForDeletion._id)
-    .then(handleResponse)
     .then(data => cardForDeletion.markup.remove())
     .catch(handleInvalidResponse)
     .finally(data => {

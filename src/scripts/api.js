@@ -10,22 +10,24 @@ export const getProfileInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   })
+  .then(handleResponse);
 }
 
-export const handleResponse = (response) => {
+const handleResponse = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    return Promise.reject(`Ошибка ${response.status}.`);
+    // Из ответа сервера извлекаем объект данных и обращаемся к его свойствам,
+    // но не забываем, что метод .json() – асинхронный → нужен .then()
+    return response.json()
+    .then(err => Promise.reject(err.message));
   }
 }
 
-export const handleInvalidResponse = (err) => {
-  console.log(err);
-}
+
 
 export const sendProfileInfo = (nameValue, aboutValue) => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  return fetch(`${config.baseUrl}/users/me1`, {
     headers: config.headers,
     method: 'PATCH',
     body: JSON.stringify({
@@ -33,6 +35,7 @@ export const sendProfileInfo = (nameValue, aboutValue) => {
       about: aboutValue,
     }),
   })
+  .then(handleResponse);
 }
 
 export const sendProfileAvatar = (avatarLink) => {
@@ -43,12 +46,14 @@ export const sendProfileAvatar = (avatarLink) => {
       avatar: avatarLink,
     }),
   })
+  .then(handleResponse);
 }
 
 export const getCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   })
+  .then(handleResponse);
 }
 
 export const sendCard = (nameValue, linkValue) => {
@@ -60,6 +65,7 @@ export const sendCard = (nameValue, linkValue) => {
       link: linkValue,
     })
   })
+  .then(handleResponse);
 }
 
 export const sendLike = (cardId) => {
@@ -67,6 +73,7 @@ export const sendLike = (cardId) => {
     headers: config.headers,
     method: 'PUT',
   })
+  .then(handleResponse);
 }
 
 export const deleteLike = (cardId) => {
@@ -74,6 +81,7 @@ export const deleteLike = (cardId) => {
     headers: config.headers,
     method: 'DELETE',
   })
+  .then(handleResponse);
 }
 
 export const deleteCard = (cardId) => {
@@ -81,8 +89,5 @@ export const deleteCard = (cardId) => {
     headers: config.headers,
     method: 'DELETE',
   })
-}
-
-export const changeButtonText = (button, text) => {
-  button.textContent = text;
+  .then(handleResponse);
 }
