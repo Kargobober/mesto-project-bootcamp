@@ -27,7 +27,7 @@ const handleResponse = (response) => {
 
 
 export const sendProfileInfo = (nameValue, aboutValue) => {
-  return fetch(`${config.baseUrl}/users/me1`, {
+  return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
     method: 'PATCH',
     body: JSON.stringify({
