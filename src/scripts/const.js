@@ -5,7 +5,7 @@
 из index.js (перекрестный импорт). Видимо это связано с babel, который
 транспилит код в старую версию (может переводит на класс,
 который имеет ограничение на перезапись свойства)*/
-export let currentUser = {};
+export let currentUser = 'myString';
 
 export const validationSettings = {
   inputSelector: '.form__item',

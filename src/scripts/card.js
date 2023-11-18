@@ -36,10 +36,10 @@ export function createCard(name, imgLink, id, likesArr, ownerObj) {
   // У пользователя есть свойство id - не карточки, а самого человека. К нему и обращаемся ниже
   // Id пользователя получаем при ответе сервера про данные пользователя (getProfileInfo)
   // findIndex останавливается при нахождении элемента, удовл-его условию
-  if (newCard.likes.findIndex(userObj => userObj._id === currentUser._id) > -1) {
+  if (newCard.likes.findIndex(userObj => userObj._id === currentUser) > -1) {
     newCard.buttonLike.classList.add('element__like-button_checked');
   }
-  if (!(ownerObj._id === currentUser._id)) {
+  if (!(ownerObj._id === currentUser)) {
     newCard.buttonDelete.remove();
   }
 

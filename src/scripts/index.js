@@ -73,7 +73,9 @@ function saveProfile(evt) {
     .finally(res => changeButtonText(evt.submitter, 'Сохранить'));
 }
 
-
+function updateUserId (variable, newValue) {
+  variable = newValue;
+}
 
 /* -----Логика----- */
 enableValidation(validationSettings);
@@ -84,7 +86,7 @@ enableValidation(validationSettings);
 Promise.all([getProfileInfo(), getCards()])
   .then(([dataProfile, dataCards]) => {
     updateLocalProfile(dataProfile.name, dataProfile.about, dataProfile.avatar);
-    currentUser._id = dataProfile._id;
+    updateUserId(currentUser, dataProfile._id);
 
     dataCards.forEach(item => {
       const newCard = createCard(item.name, item.link, item._id, item.likes, item.owner);
